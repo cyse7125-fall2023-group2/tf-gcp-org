@@ -9,11 +9,12 @@ module "project_create" {
   org_id       = var.org_id
   project_id   = var.project_id
   project_name = var.project_name
+  services = var.services
 }
 
 #Organization policy
 module "organization_policy" {
   source = "./modules/organizationPolicy"
 
-  org_id       = var.org_id
+  org_id = var.org_id
 }
