@@ -3,7 +3,7 @@ resource "google_project" "project" {
   project_id          = var.project_id
   org_id              = var.org_id
   auto_create_network = false
-  billing_account     = "013320-A9AEEE-7E0865"
+  billing_account     = "0112D8-E15D37-9EF955"
 }
 
 
