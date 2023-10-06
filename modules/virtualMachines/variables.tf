@@ -11,10 +11,10 @@ variable "project_id" {
 }
 
 variable "gce_ssh_user" {
-type = string
+  type = string
 
 }
 variable "gce_ssh_pub_key_file" {
-type = string
+  type = string
 
 }
