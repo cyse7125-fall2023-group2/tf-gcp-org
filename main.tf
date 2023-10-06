@@ -24,4 +24,14 @@ module "organization_policy" {
 module "vpc_network" {
   source     = "./modules/vpcNetwork"
   project_id = var.project_id
+
+  depends_on = [ module.project_create ]
+}
+
+module "vm_create" {
+  source     = "./modules/virtualMachines"
+
+  project_id = var.project_id
+  vpc_network_id = module.vpc_network.vpc_network_id
+  subnet_id = module.vpc_network.subnet_id
 }

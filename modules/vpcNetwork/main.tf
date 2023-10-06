@@ -48,35 +48,12 @@ resource "google_compute_firewall" "firewall" {
   target_tags = ["allow-ssh"]
 }
 
-// enable dns api in vpc
-
-resource "google_compute_instance" "gcp_vm" {
-  name         = "test"
-  machine_type = "e2-micro"
-  zone         = "us-east1-b"
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-      labels = {
-        my_label = "value"
-      }
-    }
-    auto_delete = true
-  }
-
-  network_interface {
-    network = google_compute_network.vpc_network.id
-    subnetwork = google_compute_subnetwork.public_subnetwork.id
-  }
-
-  metadata = {
-    foo = "GCP VM"
-  }
-  project = var.project_id
-
-  tags = ["allow-ssh", "test-1"]
-
-
-  # metadata_startup_script = "echo hi > /test.txt"
-
+output "vpc_network_id" {
+  value = google_compute_network.vpc_network.id
 }
+
+output "subnet_id" {
+  value = google_compute_subnetwork.public_subnetwork.id
+}
+
+

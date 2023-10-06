@@ -12,3 +12,7 @@ resource "google_project_service" "api_services" {
   project = google_project.project.project_id
   service  = var.services[count.index]
 }
+
+output "new_project_number" {
+  value = google_project.project.number
+}
