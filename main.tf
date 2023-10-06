@@ -34,4 +34,6 @@ module "vm_create" {
   project_id     = var.project_id
   vpc_network_id = module.vpc_network.vpc_network_id
   subnet_id      = module.vpc_network.subnet_id
+  gce_ssh_user = var.gce_ssh_user
+  gce_ssh_pub_key_file = var.gce_ssh_pub_key_file
 }

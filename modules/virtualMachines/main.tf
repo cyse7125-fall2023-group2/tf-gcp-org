@@ -15,10 +15,15 @@ resource "google_compute_instance" "gcp_vm" {
   network_interface {
     network    = var.vpc_network_id
     subnetwork = var.subnet_id
+    access_config {
+      // Ephemeral public IP
+    }
   }
 
   metadata = {
     foo = "GCP VM"
+    ssh-keys = "${var.gce_ssh_user}:${file(var.gce_ssh_pub_key_file)}"
+
   }
   project = var.project_id
 
