@@ -54,9 +54,6 @@ resource "google_compute_instance" "gcp_vm" {
   name         = "test"
   machine_type = "e2-micro"
   zone         = "us-east1-b"
-
-  
-
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
@@ -67,18 +64,9 @@ resource "google_compute_instance" "gcp_vm" {
     auto_delete = true
   }
 
-  // Local SSD disk
-  # scratch_disk {
-  #   interface = "SCSI"
-  # }
-
   network_interface {
     network = google_compute_network.vpc_network.id
     subnetwork = google_compute_subnetwork.public_subnetwork.id
-
-    # access_config {
-    #   // Ephemeral public IP
-    # }
   }
 
   metadata = {
@@ -91,9 +79,4 @@ resource "google_compute_instance" "gcp_vm" {
 
   # metadata_startup_script = "echo hi > /test.txt"
 
-  # service_account {
-  #   # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-  #   email  = var.service-account-email
-  #   scopes = ["cloud-platform"]
-  # }
 }

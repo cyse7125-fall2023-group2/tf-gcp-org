@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("~/.config/gcloud/service-account-key.json")
+  credentials = file(var.credFilePath)
   region = "us-east1"
 }
 
@@ -11,6 +11,7 @@ module "project_create" {
   project_id   = var.project_id
   project_name = var.project_name
   services     = var.services
+  billing_account = var.billing_account
 }
 
 #Organization policy
