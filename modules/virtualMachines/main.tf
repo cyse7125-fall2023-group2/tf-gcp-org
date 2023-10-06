@@ -4,7 +4,7 @@ resource "google_compute_instance" "gcp_vm" {
   zone         = "us-east1-b"
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2004-lts"
+      image = "debian-cloud/debian-11"
       labels = {
         my_label = "value"
       }
