@@ -35,18 +35,65 @@ resource "google_compute_router" "cloud_router" {
 }
 
 resource "google_compute_firewall" "firewall" {
-  name                    = "csye6225-firewall"
+  name                    = "allow-ssh"
   network                 = google_compute_network.vpc_network.name
   project                 = var.project_id
-  source_service_accounts = [var.servar.service-account-email]
+//  source_service_accounts = [var.service-account-email]
 
   allow {
     protocol = "tcp"
     ports    = ["22"]
   }
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["allow-ssh"]
 }
 
 // enable dns api in vpc
 
+resource "google_compute_instance" "gcp_vm" {
+  name         = "test"
+  machine_type = "e2-micro"
+  zone         = "us-east1-b"
+
+  
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      labels = {
+        my_label = "value"
+      }
+    }
+    auto_delete = true
+  }
+
+  // Local SSD disk
+  # scratch_disk {
+  #   interface = "SCSI"
+  # }
+
+  network_interface {
+    network = google_compute_network.vpc_network.id
+    subnetwork = google_compute_subnetwork.public_subnetwork.id
+
+    # access_config {
+    #   // Ephemeral public IP
+    # }
+  }
+
+  metadata = {
+    foo = "GCP VM"
+  }
+  project = var.project_id
+
+  tags = ["allow-ssh", "test-1"]
 
 
+  # metadata_startup_script = "echo hi > /test.txt"
+
+  # service_account {
+  #   # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+  #   email  = var.service-account-email
+  #   scopes = ["cloud-platform"]
+  # }
+}
