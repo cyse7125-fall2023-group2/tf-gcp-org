@@ -13,7 +13,7 @@ resource "google_compute_instance" "gcp_vm" {
   }
 
   network_interface {
-    network = var.vpc_network_id
+    network    = var.vpc_network_id
     subnetwork = var.subnet_id
   }
 
