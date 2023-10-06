@@ -21,7 +21,7 @@ variable "services" {
 }
 
 variable "gce_ssh_user" {
-  type = string
+  type    = string
   default = "vm_user"
 }
 variable "gce_ssh_pub_key_file" {
