@@ -8,9 +8,9 @@ resource "google_project" "project" {
 
 
 resource "google_project_service" "api_services" {
-  count = length(var.services)  
+  count   = length(var.services)
   project = google_project.project.project_id
-  service  = var.services[count.index]
+  service = var.services[count.index]
 }
 
 output "new_project_number" {

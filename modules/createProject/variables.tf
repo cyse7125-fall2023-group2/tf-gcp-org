@@ -15,5 +15,5 @@ variable "billing_account" {
 }
 
 variable "services" {
-  type=list(any)
+  type = list(any)
 }

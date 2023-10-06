@@ -1,5 +1,5 @@
 variable "org_id" {
-  type    = string
+  type = string
 }
 
 variable "project_id" {
@@ -8,7 +8,7 @@ variable "project_id" {
 }
 
 variable "billing_account" {
-  type    = string
+  type = string
 }
 
 variable "project_name" {
@@ -20,6 +20,6 @@ variable "services" {
   default = ["iam.googleapis.com", "orgpolicy.googleapis.com", "cloudresourcemanager.googleapis.com"]
 }
 
-variable "credFilePath"{
+variable "credFilePath" {
   type = string
 }
