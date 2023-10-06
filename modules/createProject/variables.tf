@@ -9,3 +9,11 @@ variable "project_id" {
 variable "project_name" {
   type = string
 }
+
+variable "billing_account" {
+  type = string
+}
+
+variable "services" {
+  type=list(any)
+}

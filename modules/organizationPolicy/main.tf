@@ -3,6 +3,8 @@ resource "google_org_policy_policy" "disable_default_network" {
   parent = "organizations/${var.org_id}"
 
   spec {
-    reset = true
+    rules {
+      enforce = "TRUE"
+    }
   }
 }
