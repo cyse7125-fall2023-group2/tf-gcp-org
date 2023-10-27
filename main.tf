@@ -13,11 +13,11 @@ module "project_create" {
   billing_account = var.billing_account
 }
 
-#Organization policy
-# module "organization_policy" {
-#   source = "./modules/organizationPolicy"
-#   org_id = var.org_id
-# }
+Organization policy
+ module "organization_policy" {
+  source = "./modules/organizationPolicy"
+  org_id = var.org_id
+ }
 
 module "vpc_network" {
   source     = "./modules/vpcNetwork"
