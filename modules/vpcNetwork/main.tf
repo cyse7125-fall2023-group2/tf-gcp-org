@@ -10,18 +10,21 @@ resource "google_compute_network" "vpc_network" {
 resource "google_compute_subnetwork" "public_subnetwork" {
   name          = "csye7125-public-subnetwork"
   project       = var.project_id
-  ip_cidr_range = "10.0.0.0/28"
+  ip_cidr_range = "10.0.0.0/24"
   region        = var.region
   network       = google_compute_network.vpc_network.id
 }
 
+
+
 // private subnet
-# resource "google_compute_subnetwork" "private_subnetwork" {
-#   name          = "csye7125-private-subnetwork"
-#   ip_cidr_range = "10.0.1.0/28"
-#   region        = "us-east1"
-#   network       = google_compute_network.vpc_network.id
-# }
+resource "google_compute_subnetwork" "private_subnetwork" {
+  name          = "csye7125-private-subnetwork"
+  project       = var.project_id
+  ip_cidr_range = "10.0.1.0/24"
+  region        = "us-east1"
+  network       = google_compute_network.vpc_network.id
+}
 
 # // cloud router
 resource "google_compute_router" "cloud_router" {
@@ -51,9 +54,22 @@ resource "google_compute_firewall" "firewall" {
 output "vpc_network_id" {
   value = google_compute_network.vpc_network.id
 }
+output "vpc_network_name" {
+  value = google_compute_network.vpc_network.name
+}
 
 output "subnet_id" {
   value = google_compute_subnetwork.public_subnetwork.id
 }
 
+output "private_subnetwork_name" {
+  value = google_compute_subnetwork.private_subnetwork.name
+}
 
+output "self_link" {
+  value = google_compute_subnetwork.public_subnetwork.self_link
+}
+
+output "public_ip_cidr_range" {
+  value = google_compute_subnetwork.public_subnetwork.ip_cidr_range
+}
