@@ -14,10 +14,10 @@ module "project_create" {
 }
 
 #Organization policy
-# module "organization_policy" {
-#   source = "./modules/organizationPolicy"
-#   org_id = var.org_id
-# }
+module "organization_policy" {
+  source = "./modules/organizationPolicy"
+  org_id = var.org_id
+}
 
 module "vpc_network" {
   source     = "./modules/vpcNetwork"
