@@ -109,7 +109,6 @@ resource "google_compute_instance" "bastion_host" {
     }
   }
   metadata = {
-    foo      = "Bastion Host"
     ssh-keys = "${var.bastion_ssh_user}:${file(var.bastion_ssh_pub_key_file)}"
   }
   provisioner "file" {
