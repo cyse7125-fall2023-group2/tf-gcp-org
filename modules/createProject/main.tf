@@ -6,6 +6,42 @@ resource "google_project" "project" {
   billing_account     = var.billing_account
 }
 
+resource "google_service_account" "service_account" {
+  account_id   = "csye7125-service-account-id"
+  display_name = "Service Account"
+  project = var.project_id
+}
+
+resource "google_project_iam_binding" "role-1" {
+  project = var.project_id
+  role    = "roles/container.admin"
+
+  members = [
+    # "serviceAccount:dev-service-account@elemental-icon-401200.iam.gserviceaccount.com",
+      "serviceAccount:${google_service_account.service_account.email}"
+
+  ]
+  depends_on = [google_service_account.service_account]
+
+}
+
+resource "google_project_iam_binding" "role-2" {
+  project = var.project_id
+  role    = "roles/iam.serviceAccountUser"
+
+  members = [
+      "serviceAccount:${google_service_account.service_account.email}"
+  ]
+  depends_on = [google_service_account.service_account]
+
+}
+resource "google_project_iam_member" "project" {
+  project = var.project_id
+  role    = "roles/iap.tunnelResourceAccessor"
+  member  =  "serviceAccount:${google_service_account.service_account.email}"
+
+}
+
 
 resource "google_project_service" "api_services" {
   count   = length(var.services)
@@ -15,4 +51,8 @@ resource "google_project_service" "api_services" {
 
 output "new_project_number" {
   value = google_project.project.number
+}
+
+output "service_account" {
+  value= google_service_account.service_account.email
 }
