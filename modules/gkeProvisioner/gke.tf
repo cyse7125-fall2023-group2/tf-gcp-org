@@ -18,6 +18,10 @@ resource "google_container_cluster" "primary" {
   initial_node_count       = 1
   network    = var.vpc_network_name
   subnetwork = var.private_subnetwork_name
+  release_channel {
+    channel = "STABLE"  # You can specify "RAPID", "REGULAR", or "STABLE"
+  }
+
   node_config {
     disk_size_gb = 50
   }
@@ -81,12 +85,6 @@ resource "random_shuffle" "az" {
   result_count = 1
 }
 
-# data "template_file" "init" {
-#   template = "${file("script.sh")}"
-#   vars = {
-#     consul_address = "${aws_instance.consul.private_ip}"
-#   }
-# }
 
 resource "google_compute_instance" "bastion_host" {
   project      = var.project_id
@@ -109,7 +107,6 @@ resource "google_compute_instance" "bastion_host" {
     }
   }
   metadata = {
-    foo      = "Bastion Host"
     ssh-keys = "${var.bastion_ssh_user}:${file(var.bastion_ssh_pub_key_file)}"
   }
   provisioner "file" {
