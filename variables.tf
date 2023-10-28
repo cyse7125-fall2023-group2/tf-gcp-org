@@ -4,7 +4,7 @@ variable "org_id" {
 
 variable "project_id" {
   type    = string
-  default = "csye7125-cloud-3899"
+  default = "csye7125-cloud-4000"
 }
 
 variable "billing_account" {
@@ -39,7 +39,9 @@ variable "bastion_ssh_user" {
 }
 
 variable "bastion_ssh_pub_key_file" {
-  type = string
+  type    = string
+  default = "~/.ssh/bastion-host.pub"
+
 }
 variable "credFilePath" {
   type = string
