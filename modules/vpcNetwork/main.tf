@@ -37,19 +37,19 @@ resource "google_compute_router" "cloud_router" {
   }
 }
 
-resource "google_compute_firewall" "firewall" {
-  name    = "allow-ssh"
-  network = google_compute_network.vpc_network.name
-  project = var.project_id
-  //  source_service_accounts = [var.service-account-email]
+# resource "google_compute_firewall" "firewall" {
+#   name    = "allow-ssh"
+#   network = google_compute_network.vpc_network.name
+#   project = var.project_id
+#   //  source_service_accounts = [var.service-account-email]
 
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["allow-ssh"]
-}
+#   allow {
+#     protocol = "tcp"
+#     ports    = ["22"]
+#   }
+#   source_ranges = ["0.0.0.0/0"]
+#   target_tags   = ["allow-ssh"]
+# }
 
 output "vpc_network_id" {
   value = google_compute_network.vpc_network.id

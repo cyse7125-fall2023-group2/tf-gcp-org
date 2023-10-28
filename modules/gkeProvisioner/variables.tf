@@ -59,6 +59,7 @@ variable "bastion_ssh_user" {
 
 variable "bastion_ssh_pub_key_file" {
       type    = string
+      default = "~/.ssh/bastion-host.pub"
 }
 
 variable "image_type" {
