@@ -48,7 +48,6 @@ resource "google_compute_firewall" "firewall" {
     ports    = ["22"]
   }
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["allow-ssh"]
 }
 
 output "vpc_network_id" {
