@@ -79,5 +79,5 @@ variable "credFilePath" {
 
 variable "source_ranges" {
   type = string
-  default = "35.235.240.0/20"
+  default = "0.0.0.0/0"
 }
