@@ -41,7 +41,7 @@ module "gke_provisioner" {
   bastion_ssh_user         = var.bastion_ssh_user
   bastion_ssh_pub_key_file = var.bastion_ssh_pub_key_file
   vpc_network_name         = module.vpc_network.vpc_network_name
-  private_subnetwork_name  = module.vpc_network.private_subnetwork_name
+  public_subnetwork_name   = module.vpc_network.public_subnetwork_name
   self_link                = module.vpc_network.self_link
   public_ip_cidr_range     = module.vpc_network.public_ip_cidr_range
   service_account          = module.project_create.service_account

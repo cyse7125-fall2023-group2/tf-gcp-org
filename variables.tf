@@ -4,7 +4,7 @@ variable "org_id" {
 
 variable "project_id" {
   type    = string
-  default = "csye7125-cloud-4000"
+  default = "csye7125-cloud-8888"
 }
 
 variable "billing_account" {
