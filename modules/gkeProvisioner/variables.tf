@@ -31,53 +31,65 @@ variable "public_subnetwork_name" {
   default = "csye7125-public-subnetwork"
 }
 
-variable "private_subnetwork_name" {
-  type = string
-}
+# variable "private_subnetwork_name" {
+#   type = string
+# }
 
 variable "self_link" {
-    type = string
+  type = string
 
 }
 variable "subnetwork_cidr" {
-  type    = string
+  type        = string
   description = "CIDR range of your subnetwork, e.g., 10.0.0.0/24"
-  default = "10.0.1.0/28"
+  default     = "10.0.1.0/28"
 }
 variable "service_account" {
-    type    = string
+  type = string
 
 }
 
 variable "public_ip_cidr_range" {
-      type    = string
+  type = string
 }
 
 variable "bastion_ssh_user" {
-      type    = string
+  type = string
 }
 
 variable "bastion_ssh_pub_key_file" {
-      type    = string
-      default = "~/.ssh/bastion-host.pub"
+  type    = string
+  default = "~/.ssh/bastion-host.pub"
 }
 
 variable "image_type" {
-        type    = string
-       default = "COS_CONTAINERD"
+  type    = string
+  default = "COS_CONTAINERD"
 }
 
 variable "gcloud_service_account" {
-  type = string
+  type    = string
   default = "~/.config/gcloud/service-account-key.json"
 }
 
 variable "credFilePath" {
-  type = string
+  type    = string
   default = "/tmp/service-account-key.json"
 }
 
 variable "source_ranges" {
-  type = string
+  type    = string
   default = "0.0.0.0/0"
+}
+
+variable "my_ip" {
+  type    = string
+  default = "0.0.0.0/0"
+
+}
+
+variable "jenkins_ip" {
+  type    = string
+  default = "52.44.208.170"
+
 }
