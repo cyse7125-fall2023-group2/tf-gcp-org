@@ -7,21 +7,21 @@ variable "project_id" {
   default = "csye7125-cloud-8888"
 }
 
-variable "billing_account" {
-  type = string
-}
+# variable "billing_account" {
+#   type = string
+# }
 
-variable "project_name" {
-  type    = string
-  default = "csye7125-cloud"
-}
+# variable "project_name" {
+#   type    = string
+#   default = "csye7125-cloud"
+# }
 
-variable "services" {
-  default = ["iam.googleapis.com", "orgpolicy.googleapis.com",
-    "cloudresourcemanager.googleapis.com",
-    "binaryauthorization.googleapis.com",
-  "container.googleapis.com", "compute.googleapis.com"]
-}
+# variable "services" {
+#   default = ["iam.googleapis.com", "orgpolicy.googleapis.com",
+#     "cloudresourcemanager.googleapis.com",
+#     "binaryauthorization.googleapis.com",
+#   "container.googleapis.com", "compute.googleapis.com"]
+# }
 
 #Cloud Resource Manager API.
 
@@ -65,3 +65,7 @@ variable "public_subnetwork_name" {
 # variable "vpc_network_name" {
 #   type = string
 # }
+
+variable "service_account" {
+  type = string
+}
