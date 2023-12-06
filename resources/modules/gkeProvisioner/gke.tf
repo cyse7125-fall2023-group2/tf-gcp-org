@@ -10,6 +10,7 @@ resource "google_container_cluster" "primary" {
   location            = var.region
   project             = var.project_id
   deletion_protection = false
+  
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
@@ -18,13 +19,28 @@ resource "google_container_cluster" "primary" {
   initial_node_count       = 1
   network                  = var.vpc_network_name
   subnetwork               = var.public_subnetwork_name
-  # release_channel {
+
+  cluster_autoscaling {
+    enabled             = true
+    resource_limits {
+      resource_type = "cpu"
+      minimum       = 1
+      maximum       = 100
+    }
+
+    resource_limits {
+      resource_type = "memory"
+      minimum       = 1
+      maximum       = 100
+  }
+  }
+ # release_channel {
   #   channel = "STABLE" # You can specify "RAPID", "REGULAR", or "STABLE"
   # }
 
-  node_config {
-    disk_size_gb = 50
-  }
+  # node_config {
+  #   disk_size_gb = 50
+  # }
 
   # private_cluster_config {
   #   enable_private_endpoint = true
@@ -72,13 +88,17 @@ resource "google_container_node_pool" "primary_nodes" {
     preemptible     = true
     service_account = var.service_account
     machine_type    = "e2-small"
-    disk_size_gb    = 50
+    disk_size_gb    = 25
     image_type      = var.image_type
     tags            = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
     }
-
+  }
+  autoscaling {
+    total_min_node_count = 3
+    total_max_node_count = 6
+    
   }
 }
 

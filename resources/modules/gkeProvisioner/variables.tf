@@ -17,10 +17,16 @@ variable "project_id" {
   type = string
 }
 
+variable "zone" {
+  type    = string
+  default = "us-east1-b"
+}
+
 variable "region" {
   type    = string
   default = "us-east1"
 }
+
 
 variable "vpc_network_name" {
   type = string
